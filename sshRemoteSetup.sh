@@ -1,11 +1,11 @@
 #!/bin/bash
 #
-# sshFileList.sh
+# sshRemoteSetup.sh
 #
 # Runs remote scripts via ssh using information from a file
 #
 # Usage:
-#  ./sshFileList.sh xxx_Machine_Info.txt sudoUsername sudoPwd path-to-ssh-pvt-key path-to-remoteScript
+#  ./sshRemoteSetup.sh xxx_Machine_Info.txt sudoUsername sudoPwd path-to-ssh-pvt-key path-to-remoteScript
 #
 # This assumes that the xxx_Machine_Info.txt has the following columns separated by spaces:
 #  desired-host-name in the form basename-newUserName
@@ -43,7 +43,7 @@ do
   scriptname=${script_with_path##*/}
   
   # Run the remote script, the final ENDSSH has to be at the beginning of the line
-  ssh -i $4 $2@$ip NEW_HOST=$hostname NEW_USER=$user NEW_PASS=$newPass SCRIPT=$scriptname SUDO_PASS="$'$3'" 'bash -s ' << 'ENDSSH'
+  ssh -i $4 $2@$ip NEW_HOST=$hostname NEW_USER=$user NEW_PASS="'$newPass'" SCRIPT=$scriptname SUDO_PASS="$'$3'" 'bash -s ' << 'ENDSSH'
     echo $SUDO_PASS | sudo -S ~/$SCRIPT $NEW_HOST $NEW_USER $NEW_PASS reboot
 ENDSSH
 
