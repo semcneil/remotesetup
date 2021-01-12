@@ -3,4 +3,3 @@ This copies a script to a remote server and then runs it on that server to chang
 
 Note:
 - The list of remote hostnames and IP addresses needs to end in a blank line.
-- At this point passwords cannot contain the & symbol and perhaps # may truncate it too.
