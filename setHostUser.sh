@@ -19,7 +19,6 @@
 # https://www.baeldung.com/linux/use-command-line-arguments-in-bash-script
 
 echo "Starting $0"
-# https://unix.stackexchange.com/questions/439683/set-hostname-via-ssh-error-script
 # change /etc/hostname
 oldHost=`hostname`
 echo "changing hostname from $oldHost to $1"
@@ -33,7 +32,9 @@ useradd $2 -m -s /bin/bash
 adduser $2 sudo
 
 # change user's password
-echo $2:$3 | chpasswd
+echo "Going to change password"
+echo "$2:$3"  # to make sure that the password transferred correctly
+echo "$2:$3" | sudo chpasswd
 
 # reboot
 # https://stackoverflow.com/questions/6482377/check-existence-of-input-argument-in-a-bash-shell-script
